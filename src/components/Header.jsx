@@ -5,10 +5,10 @@ function Header() {
   const { cantidadTotal } = useCarrito()
 
   return (
-    <header className="bg-white border-bottom shadow-sm">
-      <nav className="navbar navbar-expand-lg navbar-light container">
-        <Link className="navbar-brand fw-bold" to="/">
-          NovaShop
+    <header className="header-nova shadow-sm">
+      <nav className="navbar navbar-expand-lg navbar-dark container">
+        <Link className="navbar-brand" to="/">
+          <img className="logo-nova" src="/Imagen/NovaShopLogo.png" alt="NovaShop" />
         </Link>
 
         <button
@@ -49,8 +49,8 @@ function Header() {
           </ul>
 
           <div className="d-flex flex-wrap gap-2">
-            <Link className="btn btn-success btn-sm" to="/carrito">
-              Carrito <span className="badge text-bg-light">{cantidadTotal}</span>
+            <Link className="btn btn-outline-light btn-sm" to="/carrito">
+              Carrito <span className="badge text-bg-primary">{cantidadTotal}</span>
             </Link>
             <Link className="btn btn-outline-primary btn-sm" to="/login">
               Iniciar sesión
