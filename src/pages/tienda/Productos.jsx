@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import ProductCard from '../../components/ProductCard.jsx'
 import { obtenerProductos } from '../../data/productos.js'
+import { useCarrito } from '../../context/CarritoContext.jsx'
 
 function Productos() {
   const [productos] = useState(() => obtenerProductos())
   const [busqueda, setBusqueda] = useState('')
+  const { agregar } = useCarrito()
 
   const productosFiltrados = productos.filter((producto) =>
     producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -28,7 +30,7 @@ function Productos() {
         <div className="row g-4">
           {productosFiltrados.map((producto) => (
             <div key={producto.id} className="col-12 col-sm-6 col-lg-4 col-xl-3">
-              <ProductCard producto={producto} />
+              <ProductCard producto={producto} onAgregar={(item) => agregar(item, 1)} />
             </div>
           ))}
         </div>

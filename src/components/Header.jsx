@@ -1,6 +1,9 @@
 import { Link, NavLink } from 'react-router-dom'
+import { useCarrito } from '../context/CarritoContext.jsx'
 
 function Header() {
+  const { cantidadTotal } = useCarrito()
+
   return (
     <header className="bg-white border-bottom shadow-sm">
       <nav className="navbar navbar-expand-lg navbar-light container">
@@ -45,7 +48,10 @@ function Header() {
             </li>
           </ul>
 
-          <div className="d-flex gap-2">
+          <div className="d-flex flex-wrap gap-2">
+            <Link className="btn btn-success btn-sm" to="/carrito">
+              Carrito <span className="badge text-bg-light">{cantidadTotal}</span>
+            </Link>
             <Link className="btn btn-outline-primary btn-sm" to="/login">
               Iniciar sesión
             </Link>
