@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { obtenerProductoPorId } from '../../data/productos.js'
+import { formatearPrecio, precioFinal } from '../../utils/precios.js'
 import { useCarrito } from '../../context/CarritoContext.jsx'
 
 function DetalleProducto() {
@@ -56,7 +57,16 @@ function DetalleProducto() {
         <div className="col-12 col-md-7">
           <h1 className="h3">{producto.nombre}</h1>
           <p className="text-muted">{producto.atributo}</p>
-          <p className="fs-3 fw-bold">${producto.precio.toLocaleString('es-CL')}</p>
+
+          <p className="fs-3 fw-bold">
+            {formatearPrecio(precioFinal(producto))}
+            {producto.descuento > 0 && (
+              <span className="fs-6 text-muted text-decoration-line-through ms-2">
+                {formatearPrecio(producto.precio)}
+              </span>
+            )}
+          </p>
+
           <p>{producto.descripcion}</p>
 
           {sinStock ? (

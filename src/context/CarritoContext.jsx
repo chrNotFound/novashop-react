@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { precioFinal } from '../utils/precios.js'
 
 const CLAVE_STORAGE = 'carritoNovaShop'
 
@@ -17,7 +18,6 @@ function leerCarritoGuardado() {
 export function CarritoProvider({ children }) {
   const [items, setItems] = useState(leerCarritoGuardado)
 
-  // Cada vez que cambia el carrito, se guarda para que no se pierda al recargar.
   useEffect(() => {
     localStorage.setItem(CLAVE_STORAGE, JSON.stringify(items))
   }, [items])
@@ -39,7 +39,7 @@ export function CarritoProvider({ children }) {
         {
           id: producto.id,
           nombre: producto.nombre,
-          precio: producto.precio,
+          precio: precioFinal(producto),
           imagen: producto.imagen,
           stock: producto.stock,
           cantidad: Math.min(producto.stock, cantidad),
