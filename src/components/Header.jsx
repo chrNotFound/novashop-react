@@ -1,8 +1,16 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCarrito } from '../context/CarritoContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 
 function Header() {
   const { cantidadTotal } = useCarrito()
+  const { usuario, estaAutenticado, cerrarSesion } = useAuth()
+  const navigate = useNavigate()
+
+  const manejarCierre = () => {
+    cerrarSesion()
+    navigate('/')
+  }
 
   return (
     <header className="header-nova shadow-sm">
@@ -48,16 +56,28 @@ function Header() {
             </li>
           </ul>
 
-          <div className="d-flex flex-wrap gap-2">
+          <div className="d-flex flex-wrap align-items-center gap-2">
             <Link className="btn btn-outline-light btn-sm" to="/carrito">
               Carrito <span className="badge text-bg-primary">{cantidadTotal}</span>
             </Link>
-            <Link className="btn btn-outline-primary btn-sm" to="/login">
-              Iniciar sesión
-            </Link>
-            <Link className="btn btn-primary btn-sm" to="/registro">
-              Crear cuenta
-            </Link>
+
+            {estaAutenticado ? (
+              <>
+                <span className="text-light small">Hola, {usuario.nombre}</span>
+                <button type="button" className="btn btn-outline-primary btn-sm" onClick={manejarCierre}>
+                  Cerrar sesión
+                </button>
+              </>
+            ) : (
+              <>
+                <Link className="btn btn-outline-primary btn-sm" to="/login">
+                  Iniciar sesión
+                </Link>
+                <Link className="btn btn-primary btn-sm" to="/registro">
+                  Crear cuenta
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
