@@ -19,6 +19,11 @@ import AdminLayout from './pages/admin/AdminLayout.jsx'
 import Dashboard from './pages/admin/Dashboard.jsx'
 import ProductosAdmin from './pages/admin/Productos.jsx'
 import FormularioProducto from './pages/admin/FormularioProducto.jsx'
+import Ordenes from './pages/admin/Ordenes.jsx'
+import Boleta from './pages/admin/Boleta.jsx'
+import Usuarios from './pages/admin/Usuarios.jsx'
+import FormularioUsuario from './pages/admin/FormularioUsuario.jsx'
+import HistorialUsuario from './pages/admin/HistorialUsuario.jsx'
 
 function App() {
   return (
@@ -53,6 +58,12 @@ function App() {
         <Route path="productos" element={<ProductosAdmin />} />
         <Route path="productos/nuevo" element={<FormularioProducto />} />
         <Route path="productos/:id/editar" element={<FormularioProducto />} />
+        <Route path="ordenes" element={<Ordenes />} />
+        <Route path="ordenes/:id" element={<Boleta />} />
+        <Route path="usuarios" element={<Usuarios />} />
+        <Route path="usuarios/nuevo" element={<FormularioUsuario />} />
+        <Route path="usuarios/:id/editar" element={<FormularioUsuario />} />
+        <Route path="usuarios/:id/historial" element={<HistorialUsuario />} />
       </Route>
     </Routes>
   )

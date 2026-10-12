@@ -141,3 +141,37 @@ export function validarProducto(datos) {
 
   return errores
 }
+export function validarUsuario(datos, esEdicion) {
+  const errores = {}
+
+  if (!datos.nombre.trim()) {
+    errores.nombre = 'Ingresa el nombre.'
+  }
+
+  if (!datos.apellidos.trim()) {
+    errores.apellidos = 'Ingresa los apellidos.'
+  }
+
+  if (!datos.correo.trim()) {
+    errores.correo = 'Ingresa el correo.'
+  } else if (!REGEX_CORREO.test(datos.correo)) {
+    errores.correo = 'Ingresa un correo válido, por ejemplo nombre@correo.cl.'
+  }
+
+  const claveObligatoria = !esEdicion || datos.clave !== ''
+  if (claveObligatoria) {
+    if (!datos.clave) {
+      errores.clave = 'Ingresa una contraseña.'
+    } else if (datos.clave.length < 6) {
+      errores.clave = 'La contraseña debe tener al menos 6 caracteres.'
+    } else if (!/[A-Za-z]/.test(datos.clave) || !/\d/.test(datos.clave)) {
+      errores.clave = 'La contraseña debe combinar letras y números.'
+    }
+  }
+
+  if (datos.rol !== 'admin' && datos.rol !== 'cliente') {
+    errores.rol = 'Selecciona un rol.'
+  }
+
+  return errores
+}
