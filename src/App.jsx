@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
-import Header from './components/Header.jsx'
-import Footer from './components/Footer.jsx'
+import TiendaLayout from './components/TiendaLayout.jsx'
+import RutaAdmin from './components/RutaAdmin.jsx'
 import Home from './pages/tienda/Home.jsx'
 import Productos from './pages/tienda/Productos.jsx'
 import DetalleProducto from './pages/tienda/DetalleProducto.jsx'
@@ -15,32 +15,46 @@ import Checkout from './pages/tienda/Checkout.jsx'
 import ResultadoCompra from './pages/tienda/ResultadoCompra.jsx'
 import Login from './pages/tienda/Login.jsx'
 import Registro from './pages/tienda/Registro.jsx'
+import AdminLayout from './pages/admin/AdminLayout.jsx'
+import Dashboard from './pages/admin/Dashboard.jsx'
+import ProductosAdmin from './pages/admin/Productos.jsx'
+import FormularioProducto from './pages/admin/FormularioProducto.jsx'
 
 function App() {
   return (
-    <>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/productos/:id" element={<DetalleProducto />} />
-          <Route path="/categorias" element={<Categorias />} />
-          <Route path="/ofertas" element={<Ofertas />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<DetalleBlog />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/carrito" element={<Carrito />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/compra-exitosa/:id" element={<ResultadoCompra exitoso />} />
-          <Route path="/compra-error/:id" element={<ResultadoCompra exitoso={false} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-        </Routes>
-      </main>
-      <Footer />
-    </>
+    <Routes>
+      <Route element={<TiendaLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/productos" element={<Productos />} />
+        <Route path="/productos/:id" element={<DetalleProducto />} />
+        <Route path="/categorias" element={<Categorias />} />
+        <Route path="/ofertas" element={<Ofertas />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<DetalleBlog />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/compra-exitosa/:id" element={<ResultadoCompra exitoso />} />
+        <Route path="/compra-error/:id" element={<ResultadoCompra exitoso={false} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+      </Route>
+
+      <Route
+        path="/admin"
+        element={
+          <RutaAdmin>
+            <AdminLayout />
+          </RutaAdmin>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="productos" element={<ProductosAdmin />} />
+        <Route path="productos/nuevo" element={<FormularioProducto />} />
+        <Route path="productos/:id/editar" element={<FormularioProducto />} />
+      </Route>
+    </Routes>
   )
 }
 

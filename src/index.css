@@ -18,7 +18,6 @@ body {
   flex-direction: column;
 }
 
-/* Botones principales en naranja (marca NovaShop) */
 .btn-primary {
   --bs-btn-bg: #f97316;
   --bs-btn-border-color: #f97316;
@@ -41,7 +40,6 @@ body {
   --bs-btn-disabled-border-color: #f97316;
 }
 
-/* Encabezado azul marino */
 .header-nova {
   background-color: var(--nova-azul);
 }
@@ -60,7 +58,19 @@ body {
   width: auto;
 }
 
-/* Pie de página */
 .footer-nova {
   background-color: var(--nova-azul);
+}
+
+.admin-menu {
+  min-width: 220px;
+}
+
+.admin-menu .nav-link.active {
+  background-color: var(--nova-naranja);
+  color: #ffffff !important;
+}
+
+.admin-menu .nav-link:hover:not(.active) {
+  color: var(--nova-naranja) !important;
 }

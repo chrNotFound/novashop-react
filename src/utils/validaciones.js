@@ -101,3 +101,43 @@ export function validarContacto(datos) {
 
   return errores
 }
+export function validarProducto(datos) {
+  const errores = {}
+
+  if (!datos.nombre.trim()) {
+    errores.nombre = 'Ingresa el nombre del producto.'
+  }
+
+  if (!datos.categoria.trim()) {
+    errores.categoria = 'Ingresa la categoría.'
+  }
+
+  const precio = Number(datos.precio)
+  if (datos.precio.trim() === '' || Number.isNaN(precio) || precio <= 0) {
+    errores.precio = 'Ingresa un precio mayor a 0.'
+  } else if (!Number.isInteger(precio)) {
+    errores.precio = 'El precio debe ser un número entero.'
+  }
+
+  const stock = Number(datos.stock)
+  if (datos.stock.trim() === '' || !Number.isInteger(stock) || stock < 0) {
+    errores.stock = 'El stock debe ser un número entero mayor o igual a 0.'
+  }
+
+  const descuento = Number(datos.descuento)
+  if (datos.descuento.trim() === '' || !Number.isInteger(descuento) || descuento < 0 || descuento > 100) {
+    errores.descuento = 'El descuento debe ser un número entero entre 0 y 100.'
+  }
+
+  if (!datos.imagen.trim()) {
+    errores.imagen = 'Ingresa la ruta de la imagen, por ejemplo /Imagen/producto.jpg.'
+  } else if (!/^(\/|https?:\/\/)/.test(datos.imagen.trim())) {
+    errores.imagen = 'La ruta debe empezar con / o con https://.'
+  }
+
+  if (!datos.descripcion.trim()) {
+    errores.descripcion = 'Ingresa la descripción del producto.'
+  }
+
+  return errores
+}

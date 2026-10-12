@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx'
 
 function Header() {
   const { cantidadTotal } = useCarrito()
-  const { usuario, estaAutenticado, cerrarSesion } = useAuth()
+  const { usuario, estaAutenticado, esAdmin, cerrarSesion } = useAuth()
   const navigate = useNavigate()
 
   const manejarCierre = () => {
@@ -63,6 +63,11 @@ function Header() {
 
             {estaAutenticado ? (
               <>
+                {esAdmin && (
+                  <Link className="btn btn-outline-light btn-sm" to="/admin">
+                    Panel admin
+                  </Link>
+                )}
                 <span className="text-light small">Hola, {usuario.nombre}</span>
                 <button type="button" className="btn btn-outline-primary btn-sm" onClick={manejarCierre}>
                   Cerrar sesión
