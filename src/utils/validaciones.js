@@ -175,3 +175,47 @@ export function validarUsuario(datos, esEdicion) {
 
   return errores
 }
+export function validarCategoria(nombre, categorias, idActual) {
+  const errores = {}
+  const limpio = nombre.trim()
+
+  if (!limpio) {
+    errores.nombre = 'Ingresa el nombre de la categoría.'
+  } else if (limpio.length < 3) {
+    errores.nombre = 'El nombre debe tener al menos 3 caracteres.'
+  } else if (
+    categorias.some(
+      (categoria) => categoria.id !== idActual && categoria.nombre.toLowerCase() === limpio.toLowerCase()
+    )
+  ) {
+    errores.nombre = 'Ya existe una categoría con ese nombre.'
+  }
+
+  return errores
+}
+
+export function validarPerfil(datos) {
+  const errores = {}
+
+  if (!datos.nombre.trim()) {
+    errores.nombre = 'Ingresa tu nombre.'
+  }
+
+  if (!datos.apellidos.trim()) {
+    errores.apellidos = 'Ingresa tus apellidos.'
+  }
+
+  if (datos.clave) {
+    if (datos.clave.length < 6) {
+      errores.clave = 'La contraseña debe tener al menos 6 caracteres.'
+    } else if (!/[A-Za-z]/.test(datos.clave) || !/\d/.test(datos.clave)) {
+      errores.clave = 'La contraseña debe combinar letras y números.'
+    }
+
+    if (datos.confirmarClave !== datos.clave) {
+      errores.confirmarClave = 'Las contraseñas no coinciden.'
+    }
+  }
+
+  return errores
+}

@@ -24,6 +24,9 @@ import Boleta from './pages/admin/Boleta.jsx'
 import Usuarios from './pages/admin/Usuarios.jsx'
 import FormularioUsuario from './pages/admin/FormularioUsuario.jsx'
 import HistorialUsuario from './pages/admin/HistorialUsuario.jsx'
+import CategoriasAdmin from './pages/admin/CategoriasAdmin.jsx'
+import Reportes from './pages/admin/Reportes.jsx'
+import Perfil from './pages/admin/Perfil.jsx'
 
 function App() {
   return (
@@ -64,6 +67,9 @@ function App() {
         <Route path="usuarios/nuevo" element={<FormularioUsuario />} />
         <Route path="usuarios/:id/editar" element={<FormularioUsuario />} />
         <Route path="usuarios/:id/historial" element={<HistorialUsuario />} />
+        <Route path="categorias" element={<CategoriasAdmin />} />
+        <Route path="reportes" element={<Reportes />} />
+        <Route path="perfil" element={<Perfil />} />
       </Route>
     </Routes>
   )

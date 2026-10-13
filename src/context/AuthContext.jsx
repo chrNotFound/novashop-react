@@ -1,5 +1,10 @@
 import { createContext, useContext, useState } from 'react'
-import { autenticar, crearUsuario, obtenerUsuarioPorId } from '../data/usuarios.js'
+import {
+  actualizarUsuario,
+  autenticar,
+  crearUsuario,
+  obtenerUsuarioPorId,
+} from '../data/usuarios.js'
 
 const CLAVE_SESION = 'sesionNovaShop'
 
@@ -41,6 +46,14 @@ export function AuthProvider({ children }) {
     return nuevo
   }
 
+  const actualizarPerfil = (cambios) => {
+    const actualizado = actualizarUsuario(usuario.id, cambios)
+    if (actualizado) {
+      setUsuario(actualizado)
+    }
+    return actualizado
+  }
+
   const cerrarSesion = () => {
     localStorage.removeItem(CLAVE_SESION)
     setUsuario(null)
@@ -52,6 +65,7 @@ export function AuthProvider({ children }) {
     esAdmin: usuario !== null && usuario.rol === 'admin',
     iniciarSesion,
     registrar,
+    actualizarPerfil,
     cerrarSesion,
   }
 
